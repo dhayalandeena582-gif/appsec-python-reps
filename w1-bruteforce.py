@@ -23,9 +23,13 @@ for line in log.strip().splitlines():
         # YOUR PART (2–3 lines):
         # - if this ip is NOT in first yet → store ts in first[ip]
         # - always store ts in last[ip]  (it keeps getting overwritten, so it ends as the last one)
+        if ip not in first:
+            first[ip] = ts
+        last[ip] = ts
 
 for ip in first:
     seconds = (last[ip] - first[ip]).total_seconds()
-    print(ip, int(seconds))
+    if seconds < 60:
+        print(f"{ip} {log.count(ip)} {first[ip]}")
 
 
